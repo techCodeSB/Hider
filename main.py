@@ -30,20 +30,22 @@ class Hide:
         self.div = Frame(self.root)
         self.text = Button(
             self.div,
-            text="using text",
+            text="Text",
             height=2,
             width=30,
             relief='groove',
-            command=self.usingText
+            command=self.usingText,
+            bg="lightgreen"
         )
         self.text.grid(row=0, column=0)
         self.otherfile = Button(
             self.div,
-            text="using other file",
+            text="File",
             height=2,
             width=30,
             relief='groove',
-            command=self.usingOther
+            command=self.usingOther,
+            bg='white'
         )
         self.otherfile.grid(row=0, column=1)
         self.div.pack()
@@ -92,11 +94,15 @@ class Hide:
         self.usertext.config(bg="white", state=NORMAL)
         self.selectSecondfile.config(state=DISABLED)
         Hide.option = "text"
+        self.text.config(bg="lightgreen")
+        self.otherfile.config(bg="white")
 
     def usingOther(self):
         self.usertext.config(bg="lightgrey", state=DISABLED)
         self.selectSecondfile.config(state=NORMAL)
         Hide.option = "file"
+        self.text.config(bg="white")
+        self.otherfile.config(bg="lightgreen")
     # selection button functions close............................................
 
 
@@ -201,7 +207,8 @@ class Extract:
             height=2,
             width=30,
             relief='groove',
-            command=self.extractTextButton
+            command=self.extractTextButton,
+            bg='white'
         )
         self.text.grid(row=0, column=0)
         self.otherfile = Button(
@@ -210,7 +217,8 @@ class Extract:
             height=2,
             width=30,
             relief='groove',
-            command=self.extractFileButton
+            command=self.extractFileButton,
+            bg='white'
         )
         self.otherfile.grid(row=0, column=1)
         self.div.pack()
@@ -241,9 +249,13 @@ class Extract:
 
     def extractTextButton(self):
         Extract.extractOption = 'text'
+        self.text.config(bg="lightgreen")
+        self.otherfile.config(bg="white")
     
     def extractFileButton(self):
         Extract.extractOption = 'file'
+        self.text.config(bg="white")
+        self.otherfile.config(bg="lightgreen")
         # ---------------------create dialog window to input output file name-----------
         self.dialog = Toplevel(root)
         self.dialog.geometry("520x200")
@@ -252,8 +264,8 @@ class Extract:
         # self.dialog.iconbitmap(f"{os.getcwd()}\project\hider\logo.ico")
         self.dialog.transient(root)
 
-        self.text = Label(self.dialog,text="") # this label for spacing purpos only
-        self.text.pack(pady=10)
+        self.space = Label(self.dialog,text="") # this label for spacing purpos only
+        self.space.pack(pady=10)
 
         self.filename = Entry(
             self.dialog,
@@ -292,7 +304,8 @@ class Extract:
         if not Extract.extractFile == None:
             self.readExtractFile = Extract.extractFile.read()
             self.splitExtratFile = self.readExtractFile.split(Extract.key)
-            if Extract.extractOption == 'text':
+            if Extract.extractOption == 'text':                
+                print(self.splitExtratFile[1])
                 self.extracttext.delete(0.1, END)
                 self.extracttext.insert(0.1, self.splitExtratFile[1].decode())
 
@@ -330,7 +343,7 @@ class Extract:
 
 root = Tk()
 root.title("Hider by - Sourav Bishai")
-root.geometry("600x580")
+root.geometry("600x650")
 # root.resizable(False, False)
 
 # root.iconbitmap(f"{os.getcwd()}\project\hider\logo.ico")
