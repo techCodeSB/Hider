@@ -292,8 +292,7 @@ class Extract:
         if not Extract.extractFile == None:
             self.readExtractFile = Extract.extractFile.read()
             self.splitExtratFile = self.readExtractFile.split(Extract.key)
-            if Extract.extractOption == 'text':                
-                print(self.splitExtratFile[1])
+            if Extract.extractOption == 'text':
                 self.extracttext.delete(0.1, END)
                 self.extracttext.insert(0.1, self.splitExtratFile[1].decode())
 
